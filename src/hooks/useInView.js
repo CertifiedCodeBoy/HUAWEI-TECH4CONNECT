@@ -18,7 +18,7 @@ export function useInView(rootMargin = "200px") {
           obs.disconnect(); // mount once, never unmount
         }
       },
-      { rootMargin }
+      { rootMargin },
     );
     obs.observe(el);
     return () => obs.disconnect();

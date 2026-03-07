@@ -73,42 +73,44 @@ export default function Battery() {
 
         <div className="battery-stage glow-container">
           <div className="battery-canvas">
-            {inView ? <Canvas
-              camera={{ position: [0, 1.2, 7.5], fov: 35 }}
-              dpr={1}
-              frameloop="demand"
-              gl={{
-                antialias: false,
-                toneMapping: THREE.ACESFilmicToneMapping,
-                powerPreference: "high-performance",
-              }}
-            >
-              <color attach="background" args={["#080808"]} />
+            {inView ? (
+              <Canvas
+                camera={{ position: [0, 1.2, 7.5], fov: 35 }}
+                dpr={1}
+                frameloop="demand"
+                gl={{
+                  antialias: false,
+                  toneMapping: THREE.ACESFilmicToneMapping,
+                  powerPreference: "high-performance",
+                }}
+              >
+                <color attach="background" args={["#080808"]} />
 
-              {/* Lighting */}
-              <ambientLight intensity={0.15} />
-              <directionalLight position={[6, 8, 5]} intensity={1.0} />
+                {/* Lighting */}
+                <ambientLight intensity={0.15} />
+                <directionalLight position={[6, 8, 5]} intensity={1.0} />
 
-              {/* Dynamic colored accent lights for the bloomy glow */}
-              <pointLight
-                position={[-4, 2, 3]}
-                intensity={2.5}
-                color="#ff3b26"
-                distance={15}
-              />
-              <pointLight
-                position={[4, -1, -2]}
-                intensity={1.5}
-                color="#ff855b"
-                distance={15}
-              />
+                {/* Dynamic colored accent lights for the bloomy glow */}
+                <pointLight
+                  position={[-4, 2, 3]}
+                  intensity={2.5}
+                  color="#ff3b26"
+                  distance={15}
+                />
+                <pointLight
+                  position={[4, -1, -2]}
+                  intensity={1.5}
+                  color="#ff855b"
+                  distance={15}
+                />
 
-              <Environment preset="studio" environmentIntensity={0.15} />
+                <Environment preset="studio" environmentIntensity={0.15} />
 
-              <Suspense fallback={null}>
-                <BatteryGroup />
-              </Suspense>
-            </Canvas> : null}
+                <Suspense fallback={null}>
+                  <BatteryGroup />
+                </Suspense>
+              </Canvas>
+            ) : null}
           </div>
         </div>
       </div>
