@@ -1,0 +1,182 @@
+.powergrid-section {
+  width: 100%;
+  padding: 6rem 2rem;
+  background: #080808;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.powergrid-shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  min-height: 50vh;
+}
+
+.powergrid-wires {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  position: relative;
+}
+
+.powergrid-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.powergrid-copy {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.powergrid-label {
+  font-family: monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: #ff3b26;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.powergrid-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.powergrid-description {
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  line-height: 1.8;
+  color: #a0a0a0;
+  margin: 0;
+  max-width: 420px;
+}
+
+.powergrid-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.powergrid-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #ccc;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator-dot--blue {
+  background: #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.8);
+}
+
+.indicator-dot--red {
+  background: #ff3b26;
+  box-shadow: 0 0 10px rgba(255, 59, 38, 0.8);
+}
+
+.indicator-dot--cyan {
+  background: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+}
+
+/* Wire tracks in PowerGrid SVGs */
+.powergrid-svg .wire-track {
+  fill: none;
+  stroke: #111111;
+  stroke-width: 8px;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+/* Blue pulse (footsteps → battery) */
+.wire-pulse--blue {
+  fill: none;
+  stroke: #00aaff;
+  stroke-width: 4px;
+  stroke-dasharray: 15 100;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  animation: pulse-down 3s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(0, 170, 255, 1));
+}
+
+/* Red pulse (solar panels → battery) */
+.wire-pulse--red {
+  fill: none;
+  stroke: #ff3b26;
+  stroke-width: 4px;
+  stroke-dasharray: 15 100;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  animation: pulse-down 3s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 59, 38, 1));
+}
+
+.wire-arrow--blue {
+  fill: #00aaff;
+  filter: drop-shadow(0 0 6px rgba(0, 170, 255, 0.8));
+  animation: arrow-glow 2s ease-in-out infinite;
+}
+
+.wire-arrow--red {
+  fill: #ff3b26;
+  filter: drop-shadow(0 0 6px rgba(255, 59, 38, 0.8));
+  animation: arrow-glow 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+@keyframes pulse-down {
+  from {
+    stroke-dashoffset: 115;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes arrow-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .powergrid-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .powergrid-wires {
+    min-height: 150px;
+  }
+}

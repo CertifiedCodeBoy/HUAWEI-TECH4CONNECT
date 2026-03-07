@@ -1,0 +1,85 @@
+.city-section {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #080808;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.city-shell {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.city-stage {
+  width: 100%;
+  aspect-ratio: 16/9;
+  max-height: 65vh;
+  position: relative;
+}
+
+.city-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px rgba(0, 229, 255, 0.15),
+    0 0 80px rgba(255, 59, 38, 0.1);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 59, 38, 0.05) 0%,
+    transparent 60%
+  );
+  position: relative;
+}
+
+.city-copy {
+  max-width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.city-label {
+  font-family: monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: #ff3b26;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.city-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.city-description {
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.8;
+  color: #a0a0a0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .city-stage {
+    aspect-ratio: 1;
+  }
+}

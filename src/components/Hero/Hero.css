@@ -1,0 +1,229 @@
+/* ── Hero Zone ───────────────────────────────────────────────────────────────
+   200vh outer container. The sticky child (100vh) sticks from scrollY=0
+   until the outer container's bottom passes the viewport bottom,
+   giving exactly 100vh of scroll travel with ZERO visible gap.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hero-zone {
+  height: 100vh;
+  position: relative;
+}
+
+.hero-sticky {
+  position: relative;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ── Background ─────────────────────────────────────────────────────────────── */
+.hero-bg {
+  position: absolute;
+  inset: -20px;
+  z-index: 0;
+  background: transparent;
+  will-change: transform;
+  transform: translate(calc(var(--mx, 0) * 5px), calc(var(--my, 0) * -5px));
+}
+
+/* faint scan-line film grain */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.006) 2px,
+    rgba(255, 255, 255, 0.006) 4px
+  );
+  pointer-events: none;
+}
+
+/* ── Warm glow behind the 3D model ──────────────────────────────────────── */
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62vw;
+  height: 62vw;
+  max-width: 720px;
+  max-height: 720px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 30, 0, 0.3) 0%,
+    rgba(255, 100, 0, 0.18) 30%,
+    rgba(255, 60, 0, 0.08) 55%,
+    transparent 78%
+  );
+  filter: blur(50px);
+  will-change: transform;
+  transform: translate(
+    calc(-50% + var(--mx, 0) * 12px),
+    calc(-40% + var(--my, 0) * -12px)
+  );
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: translate(
+        calc(-50% + var(--mx, 0) * 12px),
+        calc(-40% + var(--my, 0) * -12px)
+      )
+      scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(
+        calc(-50% + var(--mx, 0) * 12px),
+        calc(-40% + var(--my, 0) * -12px)
+      )
+      scale(1.06);
+  }
+}
+
+/* ── 3-D Canvas ──────────────────────────────────────────────────────────────
+   Fills the ENTIRE sticky viewport — z-index 1 so it's above the bg.
+   Canvas is transparent by default in R3F (clearAlpha=0),
+   so the nebula bg shows through the empty scene areas.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Text overlay ────────────────────────────────────────────────────────────
+   z-index 2 → on top of canvas.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hero-text {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  z-index: 2;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+  transform: translateX(-50%)
+    translate(calc(var(--mx, 0) * -20px), calc(var(--my, 0) * 20px));
+}
+
+.hero-title {
+  font-family: "Alegreya Sans SC", "Alegreya Sans", sans-serif;
+  font-size: clamp(2.6rem, 6vw, 108px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.08));
+  will-change: transform;
+  transform: translate(calc(var(--mx, 0) * -4px), calc(var(--my, 0) * 1px));
+}
+
+.hero-subtitle {
+  font-family: "Alegreya Sans SC", "Alegreya Sans", sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 51px);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 0.2rem;
+}
+
+.hero-subtitle .red {
+  -webkit-text-fill-color: #e02020;
+  font-weight: 700;
+}
+
+.hero-logo {
+  max-width: clamp(180px, 30vw, 450px);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
+}
+
+/* ── Light source overlay (top-left corner) ───────────────────────────── */
+.hero-lightsource {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+  transform: translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * -6px));
+}
+
+.hero-lightsource::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -25%;
+  width: min(74vw, 1020px);
+  aspect-ratio: 900 / 652;
+  background: url("/photo_2026-03-07_04-24-21.jpg") top left / 100% 100%
+    no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.58;
+  transform: rotate(-18deg);
+  transform-origin: 0% 0%;
+  -webkit-mask-image: radial-gradient(
+    150% 124% at 8% 8%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 38%,
+    rgba(0, 0, 0, 0.25) 66%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    150% 124% at 8% 8%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 38%,
+    rgba(0, 0, 0, 0.25) 66%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Remove the ::after gradient overlay — the image already has the right color */
+.hero-lightsource::after {
+  display: none;
+}
+
+/* ── Loader ──────────────────────────────────────────────────────────────────── */
+.hero-loader {
+  background: rgba(8, 8, 8, 0.9);
+  border: 1px solid #1c1c1c;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  min-width: 180px;
+  text-align: center;
+  color: #e05a10;
+  font-size: 0.78rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.hero-loader-bar {
+  height: 3px;
+  background: #e05a10;
+  border-radius: 2px;
+  margin-bottom: 0.4rem;
+  transition: width 0.3s;
+}
