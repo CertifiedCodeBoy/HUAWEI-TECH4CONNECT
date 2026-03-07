@@ -7,6 +7,7 @@ import AmjedTest from "./components/amjedtest/amjed";
 import House from "./components/House/House";
 import Battery from "./components/Battery/Battery";
 import PowerGrid from "./components/PowerGrid/PowerGrid";
+import AlgeriaMap from "./components/AlgeriaMap/AlgeriaMap";
 import "./App.css";
 
 function WiresOverlay() {
@@ -103,6 +104,7 @@ function MainLayout() {
           <PowerGrid />
           <Battery />
         </div>
+        <AlgeriaMap />
       </main>
     </>
   );

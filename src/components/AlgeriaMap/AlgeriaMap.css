@@ -1,0 +1,218 @@
+/* ── Algeria PED Map ── */
+
+.pm-section {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+/* Header */
+.pm-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pm-title {
+  font-size: 2rem;
+  color: #f0f8ff;
+  margin: 0 0 0.4rem;
+}
+
+.pm-subtitle {
+  color: #8899aa;
+  font-size: 0.95rem;
+  margin: 0 0 1.2rem;
+}
+
+/* Controls */
+.pm-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pm-season-toggle,
+.pm-topn-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #0d1b2a;
+  border-radius: 8px;
+  padding: 0.3rem;
+}
+
+.pm-topn-toggle span {
+  color: #8899aa;
+  font-size: 0.85rem;
+  margin: 0 0.4rem;
+}
+
+.pm-season-btn,
+.pm-topn-btn {
+  background: transparent;
+  border: none;
+  color: #8899aa;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pm-season-btn:hover,
+.pm-topn-btn:hover {
+  color: #c8d8e8;
+}
+
+.pm-season-btn.pm-active,
+.pm-topn-btn.pm-active {
+  background: #00e5a0;
+  color: #060b14;
+  font-weight: 600;
+}
+
+/* Body layout */
+.pm-body {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.pm-map-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.pm-map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Background SVG image styling */
+.pm-map-bg {
+  opacity: 0.15;
+  filter: saturate(0.3) brightness(0.6);
+}
+
+/* Pulse animation for top-candidate glow circles */
+.pm-pulse {
+  animation: pm-pulse-anim 2s ease-in-out infinite;
+}
+
+@keyframes pm-pulse-anim {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Sidebar */
+.pm-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.pm-sidebar-title {
+  color: #f0f8ff;
+  font-size: 1rem;
+  margin: 0 0 0.8rem;
+}
+
+.pm-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pm-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #0d1b2a;
+  border: 1px solid #1a2a3a;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.pm-card:hover,
+.pm-card.pm-card-hover {
+  border-color: #00e5a0;
+}
+
+.pm-rank {
+  color: #00e5a0;
+  font-weight: 700;
+  font-size: 0.85rem;
+  min-width: 28px;
+}
+
+.pm-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pm-card-name {
+  color: #f0f8ff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pm-card-detail {
+  color: #667788;
+  font-size: 0.75rem;
+}
+
+.pm-card-score {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Bottom stats */
+.pm-stats {
+  display: flex;
+  justify-content: space-around;
+  background: #0d1b2a;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.pm-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.pm-stat-value {
+  color: #f0f8ff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.pm-stat-label {
+  color: #667788;
+  font-size: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pm-body {
+    flex-direction: column;
+  }
+  .pm-sidebar {
+    width: 100%;
+  }
+  .pm-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
