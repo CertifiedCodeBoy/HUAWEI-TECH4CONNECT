@@ -79,7 +79,7 @@ export default function Model3D({ scrollRef, mouseRef }) {
     // Scroll-driven upward movement — starts early and moves further up
     const threshold = 0.001;
     const adjustedScroll = Math.max(0, (scroll - threshold) / (1 - threshold));
-    const targetY = 0.5 + adjustedScroll * 2.2;
+    const targetY = 0.2 + adjustedScroll * 2.2;
     scrollY.current = THREE.MathUtils.lerp(scrollY.current, targetY, 0.08);
 
     // Gentle floating bounce (~10px at fov 40 / z 2.8 ≈ 0.023 units)
@@ -109,7 +109,7 @@ export default function Model3D({ scrollRef, mouseRef }) {
   });
 
   return (
-    <group ref={outerRef} scale={1.6} position={[0, 0.3, 0]}>
+    <group ref={outerRef} scale={1.6} position={[0, 0, 0]}>
       {/* inner group is manually centred by the useEffect above */}
       <group ref={groupRef}>
         <primitive object={scene} />
