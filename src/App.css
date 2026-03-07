@@ -118,3 +118,29 @@ main {
     display: none;
   }
 }
+
+/* ── About Us Section ──────────────────────────────────────────── */
+.about-section {
+  padding: 6rem 2rem 4rem;
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ff3b26, #ff7a5c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+}

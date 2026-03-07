@@ -95,8 +95,29 @@ function MainLayout() {
     <>
       <Navbar />
       <main>
-        <Hero />
-        <PEDDashboard />
+        <section id="home">
+          <Hero />
+        </section>
+
+        <section id="aboutus" className="about-section">
+          <h2 className="about-title">About Us</h2>
+          <p className="about-text">
+            We are <strong>Team Lafabrica</strong> — a passionate group of
+            innovators united by a shared vision for a smarter, greener future.
+            Our project leverages Huawei's cutting-edge ICT solutions to build
+            an intelligent energy management platform that monitors, predicts,
+            and optimises power distribution across Algeria's diverse
+            landscapes. From solar-rich southern regions to dense urban centres,
+            we bridge the gap between renewable energy potential and real-world
+            consumption — making clean energy accessible, efficient, and
+            sustainable for everyone.
+          </p>
+        </section>
+
+        <section id="dashboard">
+          <PEDDashboard />
+        </section>
+
         <div className="simulation-stack">
           <WiresOverlay />
           <HexSimulation />
@@ -104,7 +125,10 @@ function MainLayout() {
           <PowerGrid />
           <Battery />
         </div>
-        <AlgeriaMap />
+
+        <section id="demo">
+          <AlgeriaMap />
+        </section>
       </main>
     </>
   );
