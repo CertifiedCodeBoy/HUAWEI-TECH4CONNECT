@@ -17,6 +17,12 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
+
+      <img
+        src="/TECH4CONNECT_2.png"
+        alt="TECH 4 CONNECT"
+        className="navbar-t4c-logo"
+      />
     </nav>
   );
 }

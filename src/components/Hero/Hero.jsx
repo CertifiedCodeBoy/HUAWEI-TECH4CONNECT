@@ -205,15 +205,7 @@ export default function Hero() {
         {/* Light source overlay in top-left corner */}
         <div className="hero-lightsource" />
 
-        {/* Title — above canvas via z-index */}
-        <div className="hero-text">
-          {/* <h1 className="hero-title">HUAWEI</h1> */}
-          <img
-            src="/TECH4CONNECT_2.png"
-            alt="TECH 4 CONNECT"
-            className="hero-logo"
-          />
-        </div>
+        {/* Logo moved to Navbar */}
 
         {/* Golden glow behind the 3D model */}
         <div className="hero-glow" />

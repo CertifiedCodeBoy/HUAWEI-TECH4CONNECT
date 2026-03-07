@@ -198,7 +198,16 @@ function Character() {
     });
   }, [scene]);
 
+  // Apply centering + scaling on the GROUP, never mutate the cached scene
   useEffect(() => {
+    if (!groupRef.current) return;
+
+    // Ensure scene has identity transforms for correct measurement
+    scene.position.set(0, 0, 1.4);
+    scene.rotation.set(0, 0, 0);
+    scene.scale.setScalar(1);
+    scene.updateWorldMatrix(true, true);
+
     const box = new THREE.Box3().setFromObject(scene);
     const size = new THREE.Vector3();
     const center = new THREE.Vector3();
@@ -208,8 +217,13 @@ function Character() {
     const safeHeight = Math.max(size.y, 0.001);
     const scale = CHARACTER_TARGET_HEIGHT / safeHeight;
 
-    scene.position.set(-center.x, -box.min.y, -center.z);
-    scene.scale.setScalar(scale);
+    // Apply on the group so the cached scene stays untouched
+    groupRef.current.scale.setScalar(scale);
+    groupRef.current.position.set(
+      -center.x * scale,
+      -box.min.y * scale,
+      -center.z * scale,
+    );
   }, [scene]);
 
   // Play the first (walk-cycle) animation on loop
@@ -271,7 +285,7 @@ function Character() {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+    <group ref={groupRef} rotation={[0, Math.PI / 2, 0]}>
       <primitive object={scene} />
     </group>
   );

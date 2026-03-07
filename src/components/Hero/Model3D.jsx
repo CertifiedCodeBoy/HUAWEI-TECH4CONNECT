@@ -42,7 +42,7 @@ export default function Model3D({ scrollRef, mouseRef }) {
     box.getCenter(centre);
     // Shift the group opposite to centre so origin == visual centre,
     // then pull down by 0.6 in local Y
-    groupRef.current.position.set(-centre.x, -centre.y - 0.6, -centre.z);
+    groupRef.current.position.set(-centre.x, -centre.y - 0.35, -centre.z);
   }, [scene]);
 
   // ── Keep animation paused at t=0 (static logo pose) ─────────────────────
@@ -76,11 +76,11 @@ export default function Model3D({ scrollRef, mouseRef }) {
     const targetTilt = -scroll * (Math.PI * 0.48);
     tiltX.current = THREE.MathUtils.lerp(tiltX.current, targetTilt, 0.06);
 
-    // Scroll-driven upward movement — only starts after 60% scroll (dashboard appears)
-    const threshold = 0.3;
+    // Scroll-driven upward movement — starts early and moves further up
+    const threshold = 0.001;
     const adjustedScroll = Math.max(0, (scroll - threshold) / (1 - threshold));
-    const targetY = -0.7 + adjustedScroll * 0.6;
-    scrollY.current = THREE.MathUtils.lerp(scrollY.current, targetY, 0.03);
+    const targetY = 0.5 + adjustedScroll * 2.2;
+    scrollY.current = THREE.MathUtils.lerp(scrollY.current, targetY, 0.08);
 
     // Gentle floating bounce (~10px at fov 40 / z 2.8 ≈ 0.023 units)
     const elapsed = state.clock.getElapsedTime();
@@ -109,7 +109,7 @@ export default function Model3D({ scrollRef, mouseRef }) {
   });
 
   return (
-    <group ref={outerRef} scale={1.6} position={[0, -0.7, 0]}>
+    <group ref={outerRef} scale={1.6} position={[0, 0.3, 0]}>
       {/* inner group is manually centred by the useEffect above */}
       <group ref={groupRef}>
         <primitive object={scene} />
