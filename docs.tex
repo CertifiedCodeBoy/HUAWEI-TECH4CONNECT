@@ -1,0 +1,357 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ──
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+
+% ── Colors ──
+\definecolor{huaweiRed}{HTML}{C7000B}
+\definecolor{cyanAccent}{HTML}{00D4FF}
+\definecolor{darkBg}{HTML}{1A1A2E}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=huaweiRed,
+    urlcolor=cyanAccent,
+}
+
+% ── Header/Footer ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{huaweiRed}{\textbf{HUAWEI TECH4CONNECT}}}
+\fancyhead[R]{\textcolor{gray}{Team Lafabrica}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Title Formatting ──
+\titleformat{\section}{\Large\bfseries\color{huaweiRed}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{darkBg}}{}{0em}{}
+
+% ── Document ──
+\begin{document}
+
+% ── Title Page ──
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\Huge\bfseries\textcolor{huaweiRed}{HUAWEI TECH4CONNECT}\par}
+    \vspace{0.5cm}
+    {\Large Smart City Energy Management Platform\par}
+    \vspace{2cm}
+    {\large\textbf{Team Lafabrica}\par}
+    \vspace{0.5cm}
+    {\large Huawei ICT Solutions Showcase\par}
+    \vspace{3cm}
+    {\large\textit{Technical Documentation}\par}
+    \vspace{1cm}
+    {\large \today\par}
+    \vfill
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+\section{Project Overview}
+% ═══════════════════════════════════════════════════════════
+
+HUAWEI TECH4CONNECT is an interactive web platform showcasing a smart city energy management system for Algeria. It demonstrates how \textbf{piezoelectric energy} (harvested from footsteps) and \textbf{solar power} converge into a sustainable, bidirectional energy grid.
+
+The platform monitors, predicts, and optimizes power distribution through real-time data visualization and immersive 3D interfaces, leveraging Huawei ICT solutions for sustainable urban energy infrastructure.
+
+\subsection{Key Objectives}
+\begin{itemize}
+    \item Visualize dual-source energy harvesting (piezoelectric + solar)
+    \item Provide real-time energy analytics and 48-hour forecasting
+    \item Demonstrate smart grid bidirectional power flow
+    \item Showcase geographic energy performance across Algerian regions
+    \item Deliver an immersive, interactive 3D experience
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════
+\section{Technology Stack}
+% ═══════════════════════════════════════════════════════════
+
+\subsection{Frontend Framework}
+\begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Technology} & \textbf{Version} \\
+    \midrule
+    React              & 19.2.0 \\
+    Vite               & 7.3.1 \\
+    React Router DOM   & 7.13.1 \\
+    \bottomrule
+\end{tabular}
+
+\subsection{3D Graphics \& Visualization}
+\begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Library} & \textbf{Version} \\
+    \midrule
+    Three.js                      & 0.183.2 \\
+    React Three Fiber             & 9.5.0 \\
+    React Three Drei              & 10.7.7 \\
+    React Three Postprocessing    & 3.0.4 \\
+    \bottomrule
+\end{tabular}
+
+\subsection{Data Visualization}
+\begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Library} & \textbf{Version} \\
+    \midrule
+    Recharts & 3.8.0 \\
+    \bottomrule
+\end{tabular}
+
+\subsection{Development Tools}
+\begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Tool} & \textbf{Version} \\
+    \midrule
+    ESLint     & 9.39.1 \\
+    TypeScript & (type support) \\
+    \bottomrule
+\end{tabular}
+
+% ═══════════════════════════════════════════════════════════
+\section{Architecture}
+% ═══════════════════════════════════════════════════════════
+
+The application is a single-page application (SPA) built with React and served by Vite. The main layout renders all sections sequentially as a scrollable page.
+
+\subsection{Application Flow}
+
+\begin{verbatim}
+User Entry
+  |
+  v
+[Navbar]         -- Fixed navigation with smooth scroll
+  |
+  v
+[Hero]           -- 3D intro with scroll/mouse parallax
+  |
+  v
+[Dashboard]      -- Real-time energy analytics
+  |
+  v
+[HexSimulation]  -- Piezoelectric floor demo
+  |
+  v
+[PowerGrid]      -- SVG energy flow diagram
+  |
+  v
+[House]          -- 3D smart city model
+  |
+  v
+[Battery]        -- 3D energy storage visualization
+  |
+  v
+[AlgeriaMap]     -- Geographic PED performance
+\end{verbatim}
+
+\subsection{State Management Strategy}
+\begin{itemize}
+    \item \textbf{Refs} for high-frequency updates (scroll position, mouse coordinates) to avoid React re-renders.
+    \item \textbf{Intersection Observer} (\texttt{useInView} hook) for lazy-loading heavy 3D canvases.
+    \item \textbf{Global state object} (\texttt{globalFootState}) synchronizes character foot positions with floor tile interactions in the simulation.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════
+\section{Components}
+% ═══════════════════════════════════════════════════════════
+
+\subsection{Navbar}
+\textbf{File:} \texttt{src/components/Navbar/Navbar.jsx}
+
+Fixed-position header providing Huawei \& TECH4CONNECT branding with smooth-scroll navigation to page sections (Home, About Us, Dashboard, Demo).
+
+\subsection{Hero Section}
+\textbf{Files:} \texttt{src/components/Hero/Hero.jsx}, \texttt{Model3D.jsx}
+
+Interactive landing section featuring:
+\begin{itemize}
+    \item \textbf{3D Huawei Logo:} GLB model (\texttt{/hueawi+name.glb}) with PBR materials, floating animation, and scroll-based vertical movement.
+    \item \textbf{Particle System:} Two layers of particles with custom vertex/fragment shaders that repel from the cursor.
+    \item \textbf{Bloom Post-processing:} Glow effect applied via \texttt{@react-three/postprocessing}.
+    \item \textbf{Scroll Parallax:} Model tilts and rises as the user scrolls; tracked via refs (no re-renders).
+\end{itemize}
+
+\subsection{PED Dashboard}
+\textbf{File:} \texttt{src/components/Dashboard/PEDDashboard.jsx}
+
+Comprehensive energy analytics panel providing:
+\begin{itemize}
+    \item \textbf{48-hour Forecasting:} Solar, piezoelectric, and demand predictions displayed on a line chart with past/future data split.
+    \item \textbf{Building Analytics:} 15 buildings tracked with solar generation, piezo input, demand, comfort index (72--97\%), and surplus/deficit status.
+    \item \textbf{Anomaly Detection:} Identifies solar underperformance and consumption spikes.
+    \item \textbf{Multi-chart Interface:}
+    \begin{itemize}
+        \item Line chart --- Hourly energy forecast
+        \item Pie chart --- Energy source distribution
+        \item Bar chart --- Building performance comparison
+        \item Area chart --- Demand curve
+    \end{itemize}
+    \item \textbf{Wilaya Map Overlay:} Displays 20 Algerian regions with seasonal PED scores.
+\end{itemize}
+
+\subsection{Hexagonal Floor Simulation}
+\textbf{Files:} \texttt{src/components/HexSimulation/HexSimulation.jsx}, \texttt{HexSimulationScene.jsx}
+
+Piezoelectric floor demonstration titled \textit{``Footsteps to Electricity''}:
+\begin{itemize}
+    \item \textbf{Tile Grid:} $\sim$336 triangular metal tiles arranged in a 28$\times$12 grid.
+    \item \textbf{Character Model:} Walking animation on the floor with real-time foot position tracking.
+    \item \textbf{Tile Interaction:} Tiles sink (0.055 units depth) and transition from gray to red when stepped on, with damping recovery.
+    \item \textbf{Procedural Textures:} Metal and bump maps generated via the Canvas API.
+    \item \textbf{Rendering:} Orthographic camera, cached shared geometry, local clipping planes.
+\end{itemize}
+
+\subsection{Power Grid Visualization}
+\textbf{File:} \texttt{src/components/PowerGrid/PowerGrid.jsx}
+
+Animated SVG diagram showing dual-source energy flow:
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Blue wires:}} Footsteps $\rightarrow$ Battery
+    \item \textcolor{red}{\textbf{Red wires:}} Solar panels $\rightarrow$ Battery
+    \item \textcolor{cyan}{\textbf{Cyan indicators:}} Battery $\leftrightarrow$ City (bidirectional)
+\end{itemize}
+Pulsing wire animations with staggered delays visualize energy convergence at the central battery hub.
+
+\subsection{Smart City (House)}
+\textbf{File:} \texttt{src/components/House/House.jsx}
+
+3D city model (\texttt{/city.glb}) with:
+\begin{itemize}
+    \item Gentle continuous rotation and floating animation.
+    \item Colored accent lights (cyan + red) for a sci-fi aesthetic.
+    \item Lazy-loaded via \texttt{useInView} --- renders only when visible in viewport.
+\end{itemize}
+
+\subsection{Battery Storage}
+\textbf{File:} \texttt{src/components/Battery/Battery.jsx}
+
+Three battery models (\texttt{/battery.glb}) rendered side-by-side with:
+\begin{itemize}
+    \item Pointer-based parallax rotation responding to mouse movement.
+    \item Float animation with scale effects.
+    \item Lazy-loaded with demand-based frame rendering.
+\end{itemize}
+
+\subsection{Algeria Map}
+\textbf{File:} \texttt{src/components/AlgeriaMap/AlgeriaMap.jsx}
+
+Interactive SVG map of Algeria featuring:
+\begin{itemize}
+    \item 20 wilaya (region) markers with PED scores.
+    \item Season selector (summer, spring, autumn, winter) affecting displayed data.
+    \item Color-coded performance:
+    \begin{itemize}
+        \item \textcolor{green}{\textbf{Green}} --- Excellent ($\geq 85$)
+        \item \textcolor{yellow}{\textbf{Gold}} --- Good (70--85)
+        \item \textcolor{red}{\textbf{Red}} --- Poor ($< 70$)
+    \end{itemize}
+    \item Surplus MW generation display per region.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════
+\section{Custom Hooks}
+% ═══════════════════════════════════════════════════════════
+
+\subsection{useInView}
+\textbf{File:} \texttt{src/hooks/useInView.js}
+
+An Intersection Observer--based hook that returns a boolean indicating whether a referenced DOM element is visible in the viewport. Used to lazy-mount heavy 3D \texttt{<Canvas>} components, preventing GPU resource consumption for off-screen scenes.
+
+% ═══════════════════════════════════════════════════════════
+\section{Performance Optimizations}
+% ═══════════════════════════════════════════════════════════
+
+\begin{itemize}
+    \item \textbf{Ref-based scroll tracking:} Scroll and mouse positions stored in refs instead of state, eliminating React re-renders during high-frequency events.
+    \item \textbf{Lazy canvas mounting:} 3D scenes render only when visible in the viewport via Intersection Observer.
+    \item \textbf{Cached geometries:} Shared triangle geometry instance reused across all 336 floor tiles.
+    \item \textbf{Demand-based rendering:} Canvases configured with \texttt{frameloop="demand"}, updating only when necessary.
+    \item \textbf{Asset preloading:} GLB models preloaded in \texttt{main.jsx} before the app mounts.
+    \item \textbf{DPR cap at 1.5:} Prevents excessive pixel rendering on high-DPI displays.
+    \item \textbf{Local clipping planes:} Prevents rendering artifacts at tile boundaries in the simulation.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════
+\section{3D \& Graphics Techniques}
+% ═══════════════════════════════════════════════════════════
+
+\begin{itemize}
+    \item \textbf{Procedural textures:} Metal and bump maps generated at runtime via the HTML Canvas API.
+    \item \textbf{Custom shaders:} GLSL vertex and fragment shaders for the particle repulsion system.
+    \item \textbf{Bloom post-processing:} \texttt{EffectComposer} with \texttt{Bloom} pass for glowing neon effects.
+    \item \textbf{Orthographic projection:} Used for the hexagonal floor to maintain geometric precision.
+    \item \textbf{PBR materials:} Correct color space assignment (\texttt{SRGBColorSpace}) for physically-based rendering.
+    \item \textbf{Animation system:} Three.js \texttt{AnimationMixer} for character walk cycles and model animations.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════
+\section{File Reference}
+% ═══════════════════════════════════════════════════════════
+
+\begin{longtable}{@{}p{6.5cm}p{8cm}@{}}
+    \toprule
+    \textbf{File} & \textbf{Purpose} \\
+    \midrule
+    \endhead
+    \texttt{src/main.jsx}                                  & React entry point; GLB asset preloading \\
+    \texttt{src/App.jsx}                                   & Main app layout, routing, About section \\
+    \texttt{src/hooks/useInView.js}                        & Intersection Observer hook \\
+    \texttt{src/components/Navbar/Navbar.jsx}               & Header navigation \\
+    \texttt{src/components/Hero/Hero.jsx}                   & Hero parallax section \\
+    \texttt{src/components/Hero/Model3D.jsx}                & 3D Huawei logo model \\
+    \texttt{src/components/Dashboard/PEDDashboard.jsx}      & Energy analytics dashboard \\
+    \texttt{src/components/HexSimulation/HexSimulation.jsx} & Piezoelectric floor container \\
+    \texttt{src/components/HexSimulation/HexSimulationScene.jsx} & Floor physics \& character interaction \\
+    \texttt{src/components/House/House.jsx}                 & 3D smart city model \\
+    \texttt{src/components/PowerGrid/PowerGrid.jsx}         & Animated SVG energy flow \\
+    \texttt{src/components/Battery/Battery.jsx}             & 3D battery storage visualization \\
+    \texttt{src/components/AlgeriaMap/AlgeriaMap.jsx}       & Interactive map with PED metrics \\
+    \bottomrule
+\end{longtable}
+
+% ═══════════════════════════════════════════════════════════
+\section{Getting Started}
+% ═══════════════════════════════════════════════════════════
+
+\subsection{Prerequisites}
+\begin{itemize}
+    \item Node.js (v18+ recommended)
+    \item npm or yarn
+\end{itemize}
+
+\subsection{Installation}
+\begin{verbatim}
+git clone https://github.com/CertifiedCodeBoy/HUAWEI-TECH4CONNECT.git
+cd HUAWEI-TECH4CONNECT
+npm install
+\end{verbatim}
+
+\subsection{Development Server}
+\begin{verbatim}
+npm run dev
+\end{verbatim}
+
+\subsection{Production Build}
+\begin{verbatim}
+npm run build
+npm run preview
+\end{verbatim}
+
+\end{document}
