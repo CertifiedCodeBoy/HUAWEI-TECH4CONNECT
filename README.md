@@ -1,16 +1,55 @@
-# React + Vite
+# HUAWEI TECH4CONNECT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive web platform built by **Team Lafabrica** for the Huawei ICT Solutions hackathon. It showcases a smart city energy management system for Algeria, demonstrating how **piezoelectric energy** (harvested from footsteps) and **solar power** converge into a sustainable, bidirectional energy grid.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **3D Hero Section** – Immersive Huawei logo model with scroll/mouse parallax and bloom post-processing
+- **PED Dashboard** – Real-time energy analytics with 48-hour forecasting, building analytics, anomaly detection, AI decisions, 5G network simulation, and regional (wilaya) data
+- **Hex Simulation** – Interactive 3D piezoelectric floor model
+- **Battery Section** – 3D modular battery storage visualization
+- **House Section** – Smart home energy consumption display
+- **Wires Overlay** – Animated energy flow between components
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Technology | Version |
+|---|---|
+| React | 19.1.0 |
+| Vite | 6.3.5 |
+| Three.js | 0.176.0 |
+| @react-three/fiber | 9.1.2 |
+| @react-three/drei | 10.0.6 |
+| Recharts | 2.15.3 |
+| ESLint | 9.39.1 |
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── main.jsx                          # React entry point; GLB asset preloading
+├── App.jsx                           # Main app layout, routing, About section
+├── hooks/useInView.js                # Intersection Observer hook
+└── components/
+    ├── Navbar/Navbar.jsx             # Fixed header navigation
+    ├── Hero/Hero.jsx                 # Hero parallax section
+    ├── Hero/Model3D.jsx              # 3D Huawei logo model
+    ├── Dashboard/PEDDashboard.jsx    # Energy analytics dashboard
+    ├── HexSimulation/HexSimulation.jsx # Piezoelectric floor container
+    ├── Battery/Battery.jsx           # Battery storage section
+    ├── House/House.jsx               # Smart home section
+    └── WiresOverlay/WiresOverlay.jsx # Animated energy flow overlay
+```
